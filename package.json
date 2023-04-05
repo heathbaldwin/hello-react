@@ -13,6 +13,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^1.28.5",
     "react-scripts": "latest"
   }
 }
