@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { createClient } from './supabaseClient';
+import { supabase } from './supabaseClient';
 
-// import { createClient } from '@supabase/supabase-js';
 
 import React from 'react';
 import './style.css';
