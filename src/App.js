@@ -1,4 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
+ import { createClient } from './supabaseClient';
+
+// import { createClient } from '@supabase/supabase-js';
+
 import React from 'react';
 import './style.css';
 
