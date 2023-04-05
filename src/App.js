@@ -1,9 +1,37 @@
- import { createClient } from './supabaseClient';
+import { useState } from 'react';
+import { createClient } from './supabaseClient';
 
 // import { createClient } from '@supabase/supabase-js';
 
 import React from 'react';
 import './style.css';
+
+// A React component that queries and displays data from Supabase
+function Library() {
+  // The useState hook lets us store data in a component across renders
+  // setMyBooks is a setter function that updates the state of myBooks
+  const [myBooks, setMyBooks] = useState([]);
+  // This should look familar from Codepen
+  async function getBooks() {
+    let { data: books, error } = await supabase.from('books').select('*');
+    // Update the state
+    setMyBooks(books);
+  }
+  // Execute the function
+  getBooks();
+  // Below is what displays when you use <Library />
+  return (
+    <table>
+      {myBooks.map((b) => (
+        <tr>
+          <td>{b.title}</td>
+          <td>{b.author}</td>
+          <td>{b.isbn}</td>
+        </tr>
+      ))}
+    </table>
+  );
+}
 
 function DisplayText() {
   return (
@@ -15,7 +43,8 @@ function DisplayText() {
 const worldrecord = {
   title: 'Usain Bolt Breaking the World Record',
   year: '2009',
-  image: 'https://api.time.com/wp-content/uploads/2016/08/gettyimages-589521390.jpg',
+  image:
+    'https://api.time.com/wp-content/uploads/2016/08/gettyimages-589521390.jpg',
 };
 
 const sprinters = [
@@ -33,7 +62,6 @@ function FasterThanBolt() {
       }}
     >
       {runner.name} {runner.time}
-
     </div>
   ));
   return <div>{listSprinters}</div>;
@@ -42,24 +70,26 @@ function FasterThanBolt() {
 function BoltPicture() {
   return (
     <div>
-     <h2>{worldrecord.title} ({worldrecord.year})</h2>
-    <img
-      className="usainImage"
-      src={worldrecord.image}
-      alt={worldrecord.title}
-      style={{
-        width: worldrecord.width,
-        height: worldrecord.height
-      }}
+      <h2>
+        {worldrecord.title} ({worldrecord.year})
+      </h2>
+      <img
+        className="usainImage"
+        src={worldrecord.image}
+        alt={worldrecord.title}
+        style={{
+          width: worldrecord.width,
+          height: worldrecord.height,
+        }}
       />
-      </div>
+    </div>
   );
 }
-
 
 export default function App() {
   return (
     <div>
+      <Library />
       <DisplayText />
       <FasterThanBolt />
       <BoltPicture />
